@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jclz.fruit.dao.OrderRefundMapper">
+  <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.OrderRefund">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="out_refund_no" jdbcType="VARCHAR" property="outRefundNo" />
+    <result column="refund_fee" jdbcType="DECIMAL" property="refundFee" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="is_agree" jdbcType="INTEGER" property="isAgree" />
+    <result column="fruit_status" jdbcType="VARCHAR" property="fruitStatus" />
+    <result column="refund_reason" jdbcType="VARCHAR" property="refundReason" />
+    <result column="refund_instruction" jdbcType="VARCHAR" property="refundInstruction" />
+    <result column="refund_url" jdbcType="VARCHAR" property="refundUrl" />
+      <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_no, out_refund_no, refund_fee, create_time, is_agree, fruit_status, refund_reason, 
+    refund_instruction, refund_url, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_refund
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_refund
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jclz.fruit.entity.OrderRefund">
+    insert into order_refund (id, order_no, out_refund_no, 
+      refund_fee, create_time, is_agree, 
+      fruit_status, refund_reason, refund_instruction, 
+      refund_url, user_id)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{outRefundNo,jdbcType=VARCHAR}, 
+      #{refundFee,jdbcType=DECIMAL}, #{createTime,jdbcType=VARCHAR}, #{isAgree,jdbcType=INTEGER}, 
+      #{fruitStatus,jdbcType=VARCHAR}, #{refundReason,jdbcType=VARCHAR}, #{refundInstruction,jdbcType=VARCHAR}, 
+      #{refundUrl,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jclz.fruit.entity.OrderRefund">
+    insert into order_refund
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="outRefundNo != null">
+        out_refund_no,
+      </if>
+      <if test="refundFee != null">
+        refund_fee,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isAgree != null">
+        is_agree,
+      </if>
+      <if test="fruitStatus != null">
+        fruit_status,
+      </if>
+      <if test="refundReason != null">
+        refund_reason,
+      </if>
+      <if test="refundInstruction != null">
+        refund_instruction,
+      </if>
+      <if test="refundUrl != null">
+        refund_url,
+      </if>
+        <if test="userId != null">
+            user_id,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outRefundNo != null">
+        #{outRefundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundFee != null">
+        #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgree != null">
+        #{isAgree,jdbcType=INTEGER},
+      </if>
+      <if test="fruitStatus != null">
+        #{fruitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="refundReason != null">
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundInstruction != null">
+        #{refundInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="refundUrl != null">
+        #{refundUrl,jdbcType=VARCHAR},
+      </if>
+        <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jclz.fruit.entity.OrderRefund">
+    update order_refund
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outRefundNo != null">
+        out_refund_no = #{outRefundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundFee != null">
+        refund_fee = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgree != null">
+        is_agree = #{isAgree,jdbcType=INTEGER},
+      </if>
+      <if test="fruitStatus != null">
+        fruit_status = #{fruitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="refundReason != null">
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundInstruction != null">
+        refund_instruction = #{refundInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="refundUrl != null">
+        refund_url = #{refundUrl,jdbcType=VARCHAR},
+      </if>
+        <if test="userId != null">
+            user_id = #{userId,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jclz.fruit.entity.OrderRefund">
+    update order_refund
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      out_refund_no = #{outRefundNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      is_agree = #{isAgree,jdbcType=INTEGER},
+      fruit_status = #{fruitStatus,jdbcType=VARCHAR},
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      refund_instruction = #{refundInstruction,jdbcType=VARCHAR},
+      refund_url = #{refundUrl,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order_refund
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByOutRefundNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order_refund
+        where out_refund_no = #{outRefundNo,jdbcType=VARCHAR}
+    </select>
+    <select id="orderRefundList"  resultType="com.jclz.fruit.entity.OrderRefund">
+        select
+        r.id,
+        r.order_no orderNo,
+        r.refund_fee refundFee,
+        r.create_time createTime,
+        r.is_agree isAgree,
+        r.fruit_status fruitStatus,
+        r.refund_reason refundReason,
+        r.refund_instruction refundInstruction,
+        r.refund_url refundUrl,
+        o.fruit_name fruitName,
+        o.order_status orderStatus,
+        o.phone phone
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        order by r.create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="orderRefundListTotal"  resultType="java.lang.Integer">
+        select
+        count(r.id)
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+    <select id="orderRefundIsHandle"  resultType="com.jclz.fruit.entity.OrderRefund">
+        select
+        r.id,
+        r.order_no orderNo,
+        r.refund_fee refundFee,
+        r.create_time createTime,
+        r.is_agree isAgree,
+        r.fruit_status fruitStatus,
+        r.refund_reason refundReason,
+        r.refund_instruction refundInstruction,
+        r.refund_url refundUrl,
+        o.fruit_name fruitName,
+        o.order_status orderStatus,
+        o.phone phone
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        and  ISNULL(r.is_agree)
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        order by r.create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="orderRefundIsHandleTotal"  resultType="java.lang.Integer">
+        select
+        count(r.id)
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        and  ISNULL(r.is_agree)
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+    <select id="orderRefundHandle"  resultType="com.jclz.fruit.entity.OrderRefund">
+        select
+        r.id,
+        r.order_no orderNo,
+        r.refund_fee refundFee,
+        r.create_time createTime,
+        r.is_agree isAgree,
+        r.fruit_status fruitStatus,
+        r.refund_reason refundReason,
+        r.refund_instruction refundInstruction,
+        r.refund_url refundUrl,
+        o.fruit_name fruitName,
+        o.order_status orderStatus,
+        o.phone phone
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        and r.is_agree = 1 or r.is_agree = 0
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        order by r.create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="orderRefundHandleTotal"  resultType="java.lang.Integer">
+        select
+        count(r.id)
+        from order_refund r,order_info o
+        where r.order_no=o.order_no
+        and r.is_agree = 1 or r.is_agree = 0
+        <if test="orderNo != null and orderNo != ''">
+            and o.order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and o.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+</mapper>

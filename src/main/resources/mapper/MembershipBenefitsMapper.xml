@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jclz.fruit.dao.MembershipBenefitsMapper">
+  <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.MembershipBenefits">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fruit_id" jdbcType="INTEGER" property="fruitId" />
+    <result column="surplus_num" jdbcType="INTEGER" property="surplusNum" />
+    <result column="today_surplus_num" jdbcType="INTEGER" property="todaySurplusNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fruit_id, surplus_num, today_surplus_num
+  </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from membership_benefits
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByFruitId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from membership_benefits
+        where fruit_id = #{fruitId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.jclz.fruit.entity.MembershipBenefits">
+    select m.id,
+        m.surplus_num surplusNum,
+        m.today_surplus_num todaySurplusNum,
+        f.fruit_name fruitName,
+        f.fruit_picture_url fruitPictureUrl,
+        f.fruit_price fruitPrice,
+        f.fruit_vip_price fruitVipPrice,
+        f.fruit_type fruitType,
+        f.fruit_detail_carousel fruitDetailCarousel,
+        f.fruit_num fruitNum,
+        f.fruit_accepted_num fruitAcceptedNum,
+        f.fruit_origin_place fruitOriginPlace,
+        f.fruit_specifications fruitSpecifications,
+        f.fruit_weight fruitWeight,
+        f.fruit_packing fruitPacking,
+        f.fruit_quality fruitQuality,
+        f.fruit_storage_mode fruitStorageMode,
+        f.fruit_detail fruitDetail
+        from membership_benefits m,fruit f
+        where m.fruit_id=f.id
+            and m.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from membership_benefits
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jclz.fruit.entity.MembershipBenefits">
+    insert into membership_benefits (id, fruit_id, surplus_num, 
+      today_surplus_num)
+    values (#{id,jdbcType=INTEGER}, #{fruitId,jdbcType=INTEGER}, #{surplusNum,jdbcType=INTEGER}, 
+      #{todaySurplusNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jclz.fruit.entity.MembershipBenefits">
+    insert into membership_benefits
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fruitId != null">
+        fruit_id,
+      </if>
+      <if test="surplusNum != null">
+        surplus_num,
+      </if>
+      <if test="todaySurplusNum != null">
+        today_surplus_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fruitId != null">
+        #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="surplusNum != null">
+        #{surplusNum,jdbcType=INTEGER},
+      </if>
+      <if test="todaySurplusNum != null">
+        #{todaySurplusNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jclz.fruit.entity.MembershipBenefits">
+    update membership_benefits
+    <set>
+      <if test="fruitId != null">
+        fruit_id = #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="surplusNum != null">
+        surplus_num = #{surplusNum,jdbcType=INTEGER},
+      </if>
+      <if test="todaySurplusNum != null">
+        today_surplus_num = #{todaySurplusNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jclz.fruit.entity.MembershipBenefits">
+    update membership_benefits
+    set fruit_id = #{fruitId,jdbcType=INTEGER},
+      surplus_num = #{surplusNum,jdbcType=INTEGER},
+      today_surplus_num = #{todaySurplusNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="membershipBenefitsList" resultType="com.jclz.fruit.entity.MembershipBenefits">
+        select
+        m.id,
+        m.surplus_num surplusNum,
+        m.today_surplus_num todaySurplusNum,
+        f.fruit_name fruitName,
+        f.fruit_picture_url fruitPictureUrl,
+        f.fruit_price fruitPrice,
+        f.fruit_vip_price fruitVipPrice,
+        f.fruit_type fruitType,
+        f.fruit_detail_carousel fruitDetailCarousel,
+        f.fruit_num fruitNum,
+        f.fruit_accepted_num fruitAcceptedNum,
+        f.fruit_origin_place fruitOriginPlace,
+        f.fruit_specifications fruitSpecifications,
+        f.fruit_weight fruitWeight,
+        f.fruit_packing fruitPacking,
+        f.fruit_quality fruitQuality,
+        f.fruit_storage_mode fruitStorageMode,
+        f.fruit_detail fruitDetail
+        from membership_benefits m,fruit f
+        where m.fruit_id=f.id
+        <if test="fruitType != null">
+            and  f.fruit_type = #{fruitType,jdbcType=INTEGER}
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and f.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="membershipBenefitsListTotal" resultType="java.lang.Integer">
+        select
+        count(m.id)
+        from membership_benefits m,fruit f
+        where m.fruit_id=f.id
+        <if test="fruitType != null">
+            and  f.fruit_type = #{fruitType,jdbcType=INTEGER}
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and f.fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+    <select id="queryFruitIds" resultType="java.lang.Integer">
+        select
+        fruit_id
+        from membership_benefits
+    </select>
+</mapper>

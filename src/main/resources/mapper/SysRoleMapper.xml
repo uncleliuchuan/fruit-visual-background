@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jclz.fruit.dao.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.SysRoles">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="available" property="available" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, role, description, available
+    </sql>
+    <select id="findRoleByUsername" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        sys_roles.id,
+        sys_roles.available,
+        sys_roles.description,
+        sys_roles.role
+        FROM
+        sys_users
+        RIGHT JOIN sys_users_roles ON sys_users.id = sys_users_roles.user_id
+        LEFT JOIN sys_roles ON sys_users_roles.role_id = sys_roles.id
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+    <!--queryRolesList-->
+    <select id="queryRolesList" resultMap="BaseResultMap">
+        SELECT
+        id,
+        available,
+        description,
+        role
+        FROM
+        sys_roles
+        where available = 0
+    </select>
+    <select id="queryRolesPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_roles
+        where available = 0
+        <if test="role != null and role!=''">
+            and role = #{role,jdbcType=VARCHAR}
+        </if>
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="queryRolesPageTotal" resultType="java.lang.Integer">
+        select
+        count(*)
+        from sys_roles
+        where available = 0
+        <if test="role != null and role!=''">
+            and role = #{role,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <delete id="deleteOldRole" parameterType="java.lang.Integer">
+        delete from sys_users_roles
+        where user_id=#{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="addUserRole" parameterType="java.util.List">
+        insert into sys_users_roles
+        (id,user_id,role_id)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id,jdbcType=INTEGER},
+            #{item.user_id,jdbcType=INTEGER},
+            #{item.role_id,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+    <insert id="addRole" parameterType="com.jclz.fruit.entity.SysRoles" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into sys_roles
+        (id, role, description, available)
+        values (#{id,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}, #{available,jdbcType=INTEGER})
+    </insert>
+    <delete id="deleteRole" parameterType="java.lang.Integer">
+        delete from sys_roles
+        where id=#{id,jdbcType=INTEGER}
+    </delete>
+    <update id="updateRole" parameterType="com.jclz.fruit.entity.SysRoles">
+        update sys_roles
+        <set>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jclz.fruit.dao.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="fruit_count" jdbcType="INTEGER" property="fruitCount" />
+    <result column="fruit_amount_total" jdbcType="DECIMAL" property="fruitAmountTotal" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="fruit_id" jdbcType="INTEGER" property="fruitId" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="fruit_name" jdbcType="VARCHAR" property="fruitName" />
+    <result column="courier_number" jdbcType="VARCHAR" property="courierNumber" />
+    <result column="logistics_name" jdbcType="VARCHAR" property="logisticsName" />
+    <result column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="order_time" jdbcType="VARCHAR" property="orderTime" />
+    <result column="pay_time" jdbcType="VARCHAR" property="payTime" />
+    <result column="delivery_time" jdbcType="VARCHAR" property="deliveryTime" />
+    <result column="confirm_receiving_time" jdbcType="VARCHAR" property="confirmReceivingTime" />
+    <result column="outer_trade_no" jdbcType="VARCHAR" property="outerTradeNo" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="order_info_type" jdbcType="INTEGER" property="orderInfoType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_no, shop_id, fruit_count, fruit_amount_total, order_status, create_time, 
+    create_user, fruit_id, body, fruit_name, courier_number, logistics_name, address_id, 
+    pay_type, pay_amount, order_time, pay_time, delivery_time, confirm_receiving_time, 
+    outer_trade_no, name, phone, address,order_info_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jclz.fruit.entity.OrderInfo">
+    insert into order_info (id, order_no, shop_id, 
+      fruit_count, fruit_amount_total, order_status, 
+      create_time, create_user, fruit_id, 
+      body, fruit_name, courier_number, 
+      logistics_name, address_id, pay_type, 
+      pay_amount, order_time, pay_time, 
+      delivery_time, confirm_receiving_time, outer_trade_no, name, phone, address,order_info_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, 
+      #{fruitCount,jdbcType=INTEGER}, #{fruitAmountTotal,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, #{fruitId,jdbcType=INTEGER}, 
+      #{body,jdbcType=VARCHAR}, #{fruitName,jdbcType=VARCHAR}, #{courierNumber,jdbcType=VARCHAR}, 
+      #{logisticsName,jdbcType=VARCHAR}, #{addressId,jdbcType=INTEGER}, #{payType,jdbcType=VARCHAR}, 
+      #{payAmount,jdbcType=DECIMAL}, #{orderTime,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR}, 
+      #{deliveryTime,jdbcType=VARCHAR}, #{confirmReceivingTime,jdbcType=VARCHAR}, #{outerTradeNo,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{orderInfoType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jclz.fruit.entity.OrderInfo">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="fruitCount != null">
+        fruit_count,
+      </if>
+      <if test="fruitAmountTotal != null">
+        fruit_amount_total,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="fruitId != null">
+        fruit_id,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="fruitName != null">
+        fruit_name,
+      </if>
+      <if test="courierNumber != null">
+        courier_number,
+      </if>
+      <if test="logisticsName != null">
+        logistics_name,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time,
+      </if>
+      <if test="confirmReceivingTime != null">
+        confirm_receiving_time,
+      </if>
+      <if test="outerTradeNo != null">
+        outer_trade_no,
+      </if>
+        <if test="name != null">
+            name,
+        </if>
+        <if test="phone != null">
+            phone,
+        </if>
+        <if test="address != null">
+            address,
+        </if>
+        <if test="orderInfoType != null">
+            order_info_type,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="fruitCount != null">
+        #{fruitCount,jdbcType=INTEGER},
+      </if>
+      <if test="fruitAmountTotal != null">
+        #{fruitAmountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="fruitId != null">
+        #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitName != null">
+        #{fruitName,jdbcType=VARCHAR},
+      </if>
+      <if test="courierNumber != null">
+        #{courierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsName != null">
+        #{logisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmReceivingTime != null">
+        #{confirmReceivingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outerTradeNo != null">
+        #{outerTradeNo,jdbcType=VARCHAR},
+      </if>
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="address != null">
+            #{address,jdbcType=VARCHAR},
+        </if>
+        <if test="orderInfoType != null">
+            #{orderInfoType,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jclz.fruit.entity.OrderInfo">
+    update order_info
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="fruitCount != null">
+        fruit_count = #{fruitCount,jdbcType=INTEGER},
+      </if>
+      <if test="fruitAmountTotal != null">
+        fruit_amount_total = #{fruitAmountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="fruitId != null">
+        fruit_id = #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitName != null">
+        fruit_name = #{fruitName,jdbcType=VARCHAR},
+      </if>
+      <if test="courierNumber != null">
+        courier_number = #{courierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsName != null">
+        logistics_name = #{logisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmReceivingTime != null">
+        confirm_receiving_time = #{confirmReceivingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outerTradeNo != null">
+        outer_trade_no = #{outerTradeNo,jdbcType=VARCHAR},
+      </if>
+        <if test="name != null">
+            name = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            phone = #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="address != null">
+            address = #{address,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jclz.fruit.entity.OrderInfo">
+    update order_info
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      fruit_count = #{fruitCount,jdbcType=INTEGER},
+      fruit_amount_total = #{fruitAmountTotal,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      fruit_id = #{fruitId,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      fruit_name = #{fruitName,jdbcType=VARCHAR},
+      courier_number = #{courierNumber,jdbcType=VARCHAR},
+      logistics_name = #{logisticsName,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      order_time = #{orderTime,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      confirm_receiving_time = #{confirmReceivingTime,jdbcType=VARCHAR},
+      outer_trade_no = #{outerTradeNo,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order_info
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateOrderStatus" parameterType="com.jclz.fruit.entity.OrderInfo">
+        update order_info
+        <set>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payAmount != null">
+                pay_amount = #{payAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=VARCHAR},
+            </if>
+            <if test="confirmReceivingTime != null">
+                confirm_receiving_time = #{confirmReceivingTime,jdbcType=VARCHAR},
+            </if>
+            <if test="body != null">
+                body = #{body,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="orderInfoList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where order_status > 0
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderStatus != null">
+            and  order_status = #{orderStatus,jdbcType=INTEGER}
+        </if>
+        order by order_status asc , create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="orderInfoListTotal" resultType="java.lang.Integer">
+        select
+        count(id)
+        from order_info
+        where order_status > 0
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderStatus != null">
+            and  order_status = #{orderStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="signedList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where order_status in (3,4,8)
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        order by create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="signedListTotal" resultType="java.lang.Integer">
+        select
+       count(id)
+        from order_info
+        where order_status in (3,4,8)
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+    <select id="billList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where order_status in (3,4,7,8)
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+        order by create_time desc
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="billListTotal" resultType="java.lang.Integer">
+        select
+       count(id)
+        from order_info
+        where order_status in (3,4,7,8)
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and  order_no like "%"#{orderNo,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+</mapper>

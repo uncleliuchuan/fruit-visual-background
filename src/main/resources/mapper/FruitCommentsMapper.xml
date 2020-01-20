@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jclz.fruit.dao.FruitCommentsMapper">
+  <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.FruitComments">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fruit_id" jdbcType="INTEGER" property="fruitId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="texture" jdbcType="INTEGER" property="texture" />
+    <result column="appearance" jdbcType="INTEGER" property="appearance" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    <result column="comment_url" jdbcType="VARCHAR" property="commentUrl" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+      <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fruit_id, user_id, texture, appearance, comment_content, comment_url, create_time,order_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fruit_comments
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fruit_comments
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jclz.fruit.entity.FruitComments">
+    insert into fruit_comments (id, fruit_id, user_id, 
+      texture, appearance, comment_content, 
+      comment_url, create_time,order_id)
+    values (#{id,jdbcType=INTEGER}, #{fruitId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{texture,jdbcType=INTEGER}, #{appearance,jdbcType=INTEGER}, #{commentContent,jdbcType=VARCHAR}, 
+      #{commentUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jclz.fruit.entity.FruitComments">
+    insert into fruit_comments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fruitId != null">
+        fruit_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="texture != null">
+        texture,
+      </if>
+      <if test="appearance != null">
+        appearance,
+      </if>
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+      <if test="commentUrl != null">
+        comment_url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+        <if test="orderId != null">
+            order_id,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fruitId != null">
+        #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="texture != null">
+        #{texture,jdbcType=INTEGER},
+      </if>
+      <if test="appearance != null">
+        #{appearance,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUrl != null">
+        #{commentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+        <if test="orderId != null">
+            #{orderId,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jclz.fruit.entity.FruitComments">
+    update fruit_comments
+    <set>
+      <if test="fruitId != null">
+        fruit_id = #{fruitId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="texture != null">
+        texture = #{texture,jdbcType=INTEGER},
+      </if>
+      <if test="appearance != null">
+        appearance = #{appearance,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUrl != null">
+        comment_url = #{commentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+        <if test="orderId != null">
+            order_id = #{orderId,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jclz.fruit.entity.FruitComments">
+    update fruit_comments
+    set fruit_id = #{fruitId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      texture = #{texture,jdbcType=INTEGER},
+      appearance = #{appearance,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      comment_url = #{commentUrl,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectCommentsNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select
+       count(id)
+        from fruit_comments
+        where fruit_id = #{fruitId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

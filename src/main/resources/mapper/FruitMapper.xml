@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jclz.fruit.dao.FruitMapper">
+  <resultMap id="BaseResultMap" type="com.jclz.fruit.entity.Fruit">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fruit_name" jdbcType="VARCHAR" property="fruitName" />
+    <result column="fruit_picture_url" jdbcType="VARCHAR" property="fruitPictureUrl" />
+    <result column="fruit_price" jdbcType="DECIMAL" property="fruitPrice" />
+    <result column="fruit_vip_price" jdbcType="DECIMAL" property="fruitVipPrice" />
+    <result column="fruit_type" jdbcType="INTEGER" property="fruitType" />
+    <result column="fruit_detail_carousel" jdbcType="VARCHAR" property="fruitDetailCarousel" />
+    <result column="fruit_num" jdbcType="VARCHAR" property="fruitNum" />
+    <result column="fruit_accepted_num" jdbcType="INTEGER" property="fruitAcceptedNum" />
+    <result column="fruit_origin_place" jdbcType="VARCHAR" property="fruitOriginPlace" />
+    <result column="fruit_specifications" jdbcType="VARCHAR" property="fruitSpecifications" />
+    <result column="fruit_weight" jdbcType="VARCHAR" property="fruitWeight" />
+    <result column="fruit_packing" jdbcType="VARCHAR" property="fruitPacking" />
+    <result column="fruit_quality" jdbcType="VARCHAR" property="fruitQuality" />
+    <result column="fruit_storage_mode" jdbcType="VARCHAR" property="fruitStorageMode" />
+    <result column="fruit_detail" jdbcType="VARCHAR" property="fruitDetail" />
+      <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fruit_name, fruit_picture_url, fruit_price, fruit_vip_price, fruit_type, fruit_detail_carousel, 
+    fruit_num, fruit_accepted_num, fruit_origin_place, fruit_specifications, fruit_weight, 
+    fruit_packing, fruit_quality, fruit_storage_mode, fruit_detail,status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fruit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fruit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jclz.fruit.entity.Fruit">
+    insert into fruit (id, fruit_name, fruit_picture_url, 
+      fruit_price, fruit_vip_price, fruit_type, 
+      fruit_detail_carousel, fruit_num, fruit_accepted_num, 
+      fruit_origin_place, fruit_specifications, 
+      fruit_weight, fruit_packing, fruit_quality, 
+      fruit_storage_mode, fruit_detail,status)
+    values (#{id,jdbcType=INTEGER}, #{fruitName,jdbcType=VARCHAR}, #{fruitPictureUrl,jdbcType=VARCHAR}, 
+      #{fruitPrice,jdbcType=DECIMAL}, #{fruitVipPrice,jdbcType=DECIMAL}, #{fruitType,jdbcType=INTEGER}, 
+      #{fruitDetailCarousel,jdbcType=VARCHAR}, #{fruitNum,jdbcType=VARCHAR}, #{fruitAcceptedNum,jdbcType=INTEGER}, 
+      #{fruitOriginPlace,jdbcType=VARCHAR}, #{fruitSpecifications,jdbcType=VARCHAR}, 
+      #{fruitWeight,jdbcType=VARCHAR}, #{fruitPacking,jdbcType=VARCHAR}, #{fruitQuality,jdbcType=VARCHAR}, 
+      #{fruitStorageMode,jdbcType=VARCHAR}, #{fruitDetail,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jclz.fruit.entity.Fruit">
+    insert into fruit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fruitName != null">
+        fruit_name,
+      </if>
+      <if test="fruitPictureUrl != null">
+        fruit_picture_url,
+      </if>
+      <if test="fruitPrice != null">
+        fruit_price,
+      </if>
+      <if test="fruitVipPrice != null">
+        fruit_vip_price,
+      </if>
+      <if test="fruitType != null">
+        fruit_type,
+      </if>
+      <if test="fruitDetailCarousel != null">
+        fruit_detail_carousel,
+      </if>
+      <if test="fruitNum != null">
+        fruit_num,
+      </if>
+      <if test="fruitAcceptedNum != null">
+        fruit_accepted_num,
+      </if>
+      <if test="fruitOriginPlace != null">
+        fruit_origin_place,
+      </if>
+      <if test="fruitSpecifications != null">
+        fruit_specifications,
+      </if>
+      <if test="fruitWeight != null">
+        fruit_weight,
+      </if>
+      <if test="fruitPacking != null">
+        fruit_packing,
+      </if>
+      <if test="fruitQuality != null">
+        fruit_quality,
+      </if>
+      <if test="fruitStorageMode != null">
+        fruit_storage_mode,
+      </if>
+      <if test="fruitDetail != null">
+        fruit_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fruitName != null">
+        #{fruitName,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPictureUrl != null">
+        #{fruitPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPrice != null">
+        #{fruitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="fruitVipPrice != null">
+        #{fruitVipPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="fruitType != null">
+        #{fruitType,jdbcType=INTEGER},
+      </if>
+      <if test="fruitDetailCarousel != null">
+        #{fruitDetailCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitNum != null">
+        #{fruitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitAcceptedNum != null">
+        #{fruitAcceptedNum,jdbcType=INTEGER},
+      </if>
+      <if test="fruitOriginPlace != null">
+        #{fruitOriginPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitSpecifications != null">
+        #{fruitSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitWeight != null">
+        #{fruitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPacking != null">
+        #{fruitPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitQuality != null">
+        #{fruitQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitStorageMode != null">
+        #{fruitStorageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitDetail != null">
+        #{fruitDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jclz.fruit.entity.Fruit">
+    update fruit
+    <set>
+      <if test="fruitName != null">
+        fruit_name = #{fruitName,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPictureUrl != null and fruitPictureUrl != ''">
+        fruit_picture_url = #{fruitPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPrice != null">
+        fruit_price = #{fruitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="fruitVipPrice != null">
+        fruit_vip_price = #{fruitVipPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="fruitType != null">
+        fruit_type = #{fruitType,jdbcType=INTEGER},
+      </if>
+      <if test="fruitDetailCarousel != null and fruitDetailCarousel != ''">
+        fruit_detail_carousel = #{fruitDetailCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitNum != null">
+        fruit_num = #{fruitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitAcceptedNum != null">
+        fruit_accepted_num = #{fruitAcceptedNum,jdbcType=INTEGER},
+      </if>
+      <if test="fruitOriginPlace != null">
+        fruit_origin_place = #{fruitOriginPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitSpecifications != null">
+        fruit_specifications = #{fruitSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitWeight != null">
+        fruit_weight = #{fruitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitPacking != null">
+        fruit_packing = #{fruitPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitQuality != null">
+        fruit_quality = #{fruitQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitStorageMode != null">
+        fruit_storage_mode = #{fruitStorageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitDetail != null and fruitDetail != ''">
+        fruit_detail = #{fruitDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jclz.fruit.entity.Fruit">
+    update fruit
+    set fruit_name = #{fruitName,jdbcType=VARCHAR},
+      fruit_picture_url = #{fruitPictureUrl,jdbcType=VARCHAR},
+      fruit_price = #{fruitPrice,jdbcType=DECIMAL},
+      fruit_vip_price = #{fruitVipPrice,jdbcType=DECIMAL},
+      fruit_type = #{fruitType,jdbcType=INTEGER},
+      fruit_detail_carousel = #{fruitDetailCarousel,jdbcType=VARCHAR},
+      fruit_num = #{fruitNum,jdbcType=VARCHAR},
+      fruit_accepted_num = #{fruitAcceptedNum,jdbcType=INTEGER},
+      fruit_origin_place = #{fruitOriginPlace,jdbcType=VARCHAR},
+      fruit_specifications = #{fruitSpecifications,jdbcType=VARCHAR},
+      fruit_weight = #{fruitWeight,jdbcType=VARCHAR},
+      fruit_packing = #{fruitPacking,jdbcType=VARCHAR},
+      fruit_quality = #{fruitQuality,jdbcType=VARCHAR},
+      fruit_storage_mode = #{fruitStorageMode,jdbcType=VARCHAR},
+      fruit_detail = #{fruitDetail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="queryFruitList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fruit
+        where 1=1
+        <if test="fruitType != null">
+            and  fruit_type = #{fruitType,jdbcType=INTEGER}
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+        limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="queryFruitListPageTotal" resultType="java.lang.Integer">
+        select
+        count(id)
+        from fruit
+        where 1=1
+        <if test="fruitType != null">
+            and  fruit_type = #{fruitType,jdbcType=INTEGER}
+        </if>
+        <if test="fruitName != null and fruitName != ''">
+            and fruit_name like "%"#{fruitName,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+    <select id="queryFruitIds" resultType="java.lang.Integer">
+        select
+        id
+        from fruit
+        where status>0
+    </select>
+    <update id="lowerShelfFruit" parameterType="java.lang.Integer">
+        UPDATE fruit
+        SET
+        status=0-status
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
